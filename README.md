@@ -44,29 +44,29 @@ library(tibble)
 library(stringr)
 ```
  
-*INPUT_DIRECTORY* is a path to folder containing demultiplexed files with raw sequencing reads, named following the convention: \*_1.fastq for forward and \*_2.fastq for reverse reads.  
+### *INPUT_DIRECTORY* is a path to folder containing demultiplexed files with raw sequencing reads  
 ```
 RUN_NAME <- "SUPER_NICE_DATASET"
 MARKER_NAME<-"18S"
 INPUT_DIRECTORY<-"PATH/TO_FOLDER_WITH/DATA"
 DATABASE_PATH <- "/net/pr2/projects/plgrid/plggiecoteam/REFERENCE_DATABASES/18S/pr2_version_5.1.1_SSU_dada2_WITH_PEATBOGS_WITH_JEZIORKA.fasta.gz" # for taxonomy classification
 
-# trimming of raw reads to discard low-quality read ends  (OPTIONAL!!!)
+### trimming of raw reads to discard low-quality read ends  (OPTIONAL!!!)
 TRIM_LENGTH = 300
 
 ```
-Primer sequences used for metabarcoding:
+### Primer sequences used for metabarcoding:
 ```
   FWD<-  "GCTTGTCTCAAAGATTAAGCC" # check this
   REV<- "GCCTGCTGCCTTCCTTGGA"   # check this
  
 ```
 
-File input and N-filtering (filtering reads with uncalled bases)  
+### File input and N-filtering (filtering reads with uncalled bases)  
 ```
 path <-paste0(INPUT_DIRECTORY)
 list.files(path)   # list files to check if the directory is correct
-fnFs <- sort(list.files(path, pattern="_R1_001.fastq.gz", full.names = TRUE))  ## check if this pattern matches your files and adjust it!
+fnFs <- sort(list.files(path, pattern="_R1_001.fastq.gz", full.names = TRUE))  ## check if this pattern matches your files and adjust it!!!!
 fnRs <- sort(list.files(path, pattern="_R2_001.fastq.gz", full.names = TRUE)) 	 
 
 fnFs.filtN <- file.path(path, "filtN", basename(fnFs))		 
@@ -155,7 +155,6 @@ rm(seqtab.nochim)
  
 ### Taxonomy classification with dada2 for 18S
 ```	 
-#  for 18S  DADA2 classification
  sequences <- colnames(seqtab.nochim.filtered_length.filtered_min_abundance)
  TAXA <- assignTaxonomy(sequences,DATABASE_PATH,minBoot=80,tryRC=TRUE, multithread = TRUE,outputBootstraps=TRUE)
   TAXA_DF<-data.frame(TAXA)
