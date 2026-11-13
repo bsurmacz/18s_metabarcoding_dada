@@ -12,7 +12,7 @@ OUTPUT:
 ssh <yourname>@ares.cyfronet.pl
 ```
 
-## start interactive session in slurm (for now: 10 hours of using 176 cores and 50G of RAM)
+## start interactive session in slurm using resources from the computing grant (for now: 10 hours of using 16 cores and 50G of RAM)
 ```
 srun -N 1 -n 16 -p plgrid -A plgtardigrada-cpu -t 10:0:0 --mem=50G --pty /bin/bash -l
 ```
@@ -24,12 +24,17 @@ ml r/4.4.2-foss-2023a
 
 ```
 
-## work in R:
+## go to your working directory or wherever you want
+```
+cd $SCRATCH
+
+```
+## start R:
 ```
 R
 ```
-
-Loading required libraries:
+In interactive R session: 
+Loading required libraries
 ```
 library(dada2)  
 library(dplyr)
@@ -38,13 +43,12 @@ library(seqinr)
 library(tibble)
 library(stringr)
 ```
-
-Setting run parameters (the same script is used to the analysis of 3 markers: *COIA*, *COIB*, *18S*).  
+ 
 *INPUT_DIRECTORY* is a path to folder containing demultiplexed files with raw sequencing reads, named following the convention: \*_1.fastq for forward and \*_2.fastq for reverse reads.  
 ```
-RUN_NAME <- "COIA_2024_04_09"
-MARKER_NAME<-"COIA"
-INPUT_DIRECTORY<-"COIA"
+RUN_NAME <- "SUPER_NICE_DATASET"
+MARKER_NAME<-"18S"
+INPUT_DIRECTORY<-"PATH/TO_FOLDER_WITH/DATA"
 DATABASE_PATH <- "/net/pr2/projects/plgrid/plggiecoteam/REFERENCE_DATABASES/18S/pr2_version_5.1.1_SSU_dada2_WITH_PEATBOGS_WITH_JEZIORKA.fasta.gz" # for taxonomy classification
 
 # trimming of raw reads to discard low-quality read ends  (OPTIONAL!!!)
@@ -162,7 +166,7 @@ rm(seqtab.nochim)
 ```	 
 names<-paste0("zotu",1:ncol(seqtab.nochim.filtered_length.filtered_min_abundance.filtered_translation))
 sequences<-colnames(seqtab.nochim.filtered_length.filtered_min_abundance.filtered_translation)
-ZOTUS_FILENAME<-paste0("zotus_",MARKER_NAME,".fasta")
+ZOTUS_FILENAME<-paste0("zotus_",RUN_NAME,"_",MARKER_NAME,".fasta")
 write.fasta(as.list(sequences),names,paste0(RUN_NAME,"_zOTUS.fasta"))
 ```
 
