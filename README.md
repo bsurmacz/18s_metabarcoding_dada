@@ -7,7 +7,7 @@ OUTPUT:
 **<RUN_NAME>**_zOTU_TABLE.csv - zOTU table with classification (with taxonomy classification by dada2 AssignTaxonomy on custom database)    
 **<RUN_NAME>**_zOTUs.fasta - fasta file with zOTU sequences
 
-## login to ares using your login in terminal
+## log in to ares using your login in terminal
 ```
 ssh <yourname>@ares.cyfronet.pl
 ```
@@ -21,7 +21,7 @@ screen -S meta
 srun -N 1 -n 16 -p plgrid -A plgtardigrada-cpu -t 10:0:0 --mem=50G --pty /bin/bash -l
 ```
 
-## load modules
+## load the modules
 ```
 ml cutadapt/3.5-gcccore-11.2.0
 ml r/4.4.2-foss-2023a
