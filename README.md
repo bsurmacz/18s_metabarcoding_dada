@@ -11,7 +11,11 @@ OUTPUT:
 ```
 ssh <yourname>@ares.cyfronet.pl
 ```
-
+## start screen session to make the script run even after logging out 
+```
+screen -S meta
+```
+(to go back to the session use screen -r meta)
 ## start interactive session in slurm using resources from the computing grant (for now: 10 hours of using 16 cores and 50G of RAM)
 ```
 srun -N 1 -n 16 -p plgrid -A plgtardigrada-cpu -t 10:0:0 --mem=50G --pty /bin/bash -l
