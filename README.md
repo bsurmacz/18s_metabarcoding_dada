@@ -65,7 +65,7 @@ Primer sequences used for metabarcoding:
 File input and N-filtering (filtering reads with uncalled bases)  
 ```
 path <-paste0(INPUT_DIRECTORY)
-list.files(path)
+list.files(path)   # list files to check if the directory is correct
 fnFs <- sort(list.files(path, pattern="_R1_001.fastq.gz", full.names = TRUE))  ## check if this pattern matches your files and adjust it!
 fnRs <- sort(list.files(path, pattern="_R2_001.fastq.gz", full.names = TRUE)) 	 
 
